@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   X, CheckCircle2, AlertTriangle, Building2, Zap, MapPin, Calendar, 
-  DollarSign, ShieldCheck, FileText, Users, ArrowUpRight, Award, Lock
+  DollarSign, ShieldCheck, FileText, Users, ArrowUpRight, Award, Lock, ExternalLink, Globe
 } from 'lucide-react';
 import { kiplProfile } from '../data/kiplProfile';
 
@@ -28,6 +28,14 @@ export default function TenderDetailModal({ tender, onClose }) {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-mono text-xs text-slate-400">{tender.id}</span>
+                {tender.nitNumber && (
+                  <>
+                    <span className="text-slate-600">•</span>
+                    <span className="font-mono text-xs text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                      {tender.nitNumber}
+                    </span>
+                  </>
+                )}
                 <span className="text-slate-600">•</span>
                 <span className="text-xs font-semibold text-blue-400">{tender.subSector}</span>
               </div>
@@ -68,18 +76,34 @@ export default function TenderDetailModal({ tender, onClose }) {
             </div>
           </div>
 
-          {/* Department & State Info */}
-          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-blue-400" />
+          {/* Department, State Info & Direct Official Portal Link */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 gap-3">
+            <div className="flex items-center space-x-2.5">
+              <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0" />
               <div>
                 <span className="text-slate-400 font-medium">Department / Client:</span>
                 <span className="font-semibold text-white ml-2">{tender.department} ({tender.state})</span>
               </div>
             </div>
-            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              {tender.fitScore}% Eligibility Match
-            </span>
+
+            <div className="flex items-center space-x-2 w-full sm:w-auto justify-between sm:justify-end">
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                {tender.fitScore}% Match Score
+              </span>
+
+              {tender.portalUrl && (
+                <a
+                  href={tender.portalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500 text-cyan-300 hover:text-white border border-cyan-500/40 font-semibold transition-all flex items-center gap-1.5 text-xs shadow-sm"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Open Official Portal</span>
+                  <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+                </a>
+              )}
+            </div>
           </div>
 
           {/* KIPL Pre-Qualification Match Analysis */}
@@ -140,17 +164,22 @@ export default function TenderDetailModal({ tender, onClose }) {
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-4 border-t border-slate-800 flex items-center justify-between bg-[#0f172a] rounded-b-2xl">
+        <div className="px-6 py-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between bg-[#0f172a] rounded-b-2xl gap-3">
           <span className="text-slate-400 text-[11px]">
             NFB Bank Guarantee Limit Available: <strong className="text-white">₹{kiplProfile.nonFundBasedLimit} Cr</strong>
           </span>
           <div className="flex items-center space-x-3">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-colors text-xs"
-            >
-              Close
-            </button>
+            {tender.portalUrl && (
+              <a
+                href={tender.portalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-cyan-600/20 hover:bg-cyan-600 text-cyan-300 hover:text-white border border-cyan-500/40 font-semibold transition-all text-xs flex items-center gap-1.5"
+              >
+                <span>Visit Portal</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
             <button
               onClick={() => {
                 alert(`Tender ${tender.id} document checklist assigned to KIPL Bid Team!`);

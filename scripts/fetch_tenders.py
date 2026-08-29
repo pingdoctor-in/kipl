@@ -13,12 +13,32 @@ KIPL_PROFILE = {
     "licensedStates": ["Telangana", "Andhra Pradesh", "Maharashtra", "Madhya Pradesh", "Rajasthan", "Goa", "Karnataka", "Uttar Pradesh", "Jharkhand"]
 }
 
+# Department Source Portal Mapping
+DEPT_PORTAL_MAP = {
+    "TS TRANSCO": "https://tender.telangana.gov.in/",
+    "TSSPDCL": "https://tender.telangana.gov.in/",
+    "TSNPDCL": "https://tender.telangana.gov.in/",
+    "JVVNL": "https://eproc.rajasthan.gov.in/",
+    "AVVNL": "https://eproc.rajasthan.gov.in/",
+    "KPTCL": "https://eproc.karnataka.gov.in/",
+    "MSEDCL": "https://mahatenders.gov.in/",
+    "MSETCL": "https://mahatenders.gov.in/",
+    "MES": "https://eprocure.gov.in/eprocure/app",
+    "RITES": "https://eprocure.gov.in/eprocure/app",
+    "TANGEDCO": "https://tntenders.gov.in/nicgep/app",
+    "APTRANSCO": "https://apeprocurement.gov.in/",
+    "MPPKVVCL": "https://mpeproc.gov.in/",
+    "Default": "https://eprocure.gov.in/eprocure/app"
+}
+
 # Real-world Tender Template Generators matching State & Central Portals
 PORTAL_TEMPLATES = [
     {
         "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/JVVNL/RDSS/2026/",
         "title": "Supply & Erection of Feeder Separation Works under RDSS ({circle} Circle)",
-        "department": "JVVNL / AVVNL - Rajasthan DISCOMs",
+        "department": "JVVNL - Jaipur Vidyut Vitran Nigam Ltd",
+        "portalUrl": "https://eproc.rajasthan.gov.in/",
         "state": "Rajasthan",
         "sector": "Electrical EPC",
         "subSector": "Distribution & RDSS",
@@ -29,8 +49,10 @@ PORTAL_TEMPLATES = [
     },
     {
         "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/KPTCL/110KV/2026/",
         "title": "Construction of 110/11kV Substation & 110kV Line at {circle}",
         "department": "KPTCL - Karnataka Power Transmission Corp Ltd",
+        "portalUrl": "https://eproc.karnataka.gov.in/",
         "state": "Karnataka",
         "sector": "Electrical EPC",
         "subSector": "Substation & Transmission",
@@ -41,8 +63,10 @@ PORTAL_TEMPLATES = [
     },
     {
         "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/MSEDCL/RDSS/2026/",
         "title": "Distribution Infrastructure Enhancement under RDSS ({circle} Division)",
         "department": "MSEDCL - Maharashtra State Electricity Distribution Co Ltd",
+        "portalUrl": "https://mahatenders.gov.in/",
         "state": "Maharashtra",
         "sector": "Electrical EPC",
         "subSector": "Distribution & RDSS",
@@ -53,8 +77,10 @@ PORTAL_TEMPLATES = [
     },
     {
         "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/TSSPDCL/HDD/2026/",
         "title": "Conversion of 22kV OH Lines to UG Cable Network using HDD ({circle})",
-        "department": "TSSPDCL / TSNPDCL - Telangana DISCOMs",
+        "department": "TSSPDCL - Southern Power Distribution Co of Telangana Ltd",
+        "portalUrl": "https://tender.telangana.gov.in/",
         "state": "Telangana",
         "sector": "Electrical EPC",
         "subSector": "UG Cable & HDD",
@@ -64,9 +90,25 @@ PORTAL_TEMPLATES = [
         "requirements": ["Grade A TG Electrical License", "HDD Rig Equipment Ownership", "UG Cabling > ₹15 Cr"]
     },
     {
+        "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/TSTSLI/SS/2026/",
+        "title": "Supply & Erection of 132/11kV Substation & Bays under TSTLI Project ({circle})",
+        "department": "TS TRANSCO - Transmission Corp of Telangana Ltd",
+        "portalUrl": "https://tender.telangana.gov.in/",
+        "state": "Telangana",
+        "sector": "Electrical EPC",
+        "subSector": "Substation & Transmission",
+        "circles": ["Mahabubnagar", "Bheemganpur", "Rangaraopally", "Nalgonda"],
+        "base_value": 15.0,
+        "max_value": 35.0,
+        "requirements": ["Grade A TG Electrical License", "TS TRANSCO 132kV Substation Proof", "Bank Solvency"]
+    },
+    {
         "id_prefix": "TEN-CIV-2026-",
+        "nit_prefix": "NIT/MES/KHADKI/2026/",
         "title": "Construction of Multi-Storey OTM Accommodation (Phase-III) at {circle}",
         "department": "MES - Military Engineering Services",
+        "portalUrl": "https://eprocure.gov.in/eprocure/app",
         "state": "Maharashtra",
         "sector": "Civil Infrastructure",
         "subSector": "Institutional & Defence",
@@ -77,8 +119,10 @@ PORTAL_TEMPLATES = [
     },
     {
         "id_prefix": "TEN-CIV-2026-",
+        "nit_prefix": "NIT/TSIIC/WH/2026/",
         "title": "Construction of Commercial & Retail Warehouse Facility ({circle})",
-        "department": "State Industrial Infrastructure Corp / Divis Lab",
+        "department": "TSIIC / State Industrial Infrastructure Corp",
+        "portalUrl": "https://tsiic.telangana.gov.in/",
         "state": "Telangana",
         "sector": "Civil Infrastructure",
         "subSector": "Warehouses & Commercial",
@@ -89,12 +133,14 @@ PORTAL_TEMPLATES = [
     },
     {
         "id_prefix": "TEN-ELE-2026-",
+        "nit_prefix": "NIT/TANGEDCO/220KV/2026/",
         "title": "Turnkey 220kV DC Transmission Line & 400kV Substation ({circle})",
-        "department": "TANGEDCO / APTRANSCO",
-        "state": "Andhra Pradesh",
+        "department": "TANGEDCO - Tamil Nadu Generation & Distribution Corp",
+        "portalUrl": "https://tntenders.gov.in/nicgep/app",
+        "state": "Tamil Nadu",
         "sector": "Electrical EPC",
         "subSector": "Substation & Transmission",
-        "circles": ["Kurnool", "Visakhapatnam", "Tirupati"],
+        "circles": ["Perambur", "Chennai", "Coimbatore"],
         "base_value": 210.0,
         "max_value": 280.0,
         "requirements": ["Turnover > ₹150 Cr/yr", "220kV Line Experience", "NFB Guarantee > ₹30 Cr"]
@@ -103,11 +149,9 @@ PORTAL_TEMPLATES = [
 
 def calculate_eligibility(value_cr, state, sector):
     """Calculates eligibility score and fit category based on KIPL's authentic profile."""
-    # Check if JV is required
     if value_cr > KIPL_PROFILE["maxStandaloneCapacity"]:
         return "JV Required", 78, f"Tender value (₹{value_cr:.2f} Cr) exceeds KIPL standalone threshold (~₹180 Cr). JV recommended with {KIPL_PROFILE['jvAlliancePartner']}."
     
-    # State License Match
     state_matched = state in KIPL_PROFILE["licensedStates"]
     
     if state_matched and value_cr <= 150.0:
@@ -144,10 +188,15 @@ def generate_live_tenders():
         
         fit, fit_score, reasoning = calculate_eligibility(value_cr, template["state"], template["sector"])
         
+        tender_id = f"{template['id_prefix']}{counter}"
+        nit_number = f"{template['nit_prefix']}{counter:03d}"
+        
         tender = {
-            "id": f"{template['id_prefix']}{counter}",
+            "id": tender_id,
+            "nitNumber": nit_number,
             "title": template["title"].format(circle=circle),
             "department": template["department"],
+            "portalUrl": template["portalUrl"],
             "state": template["state"],
             "sector": template["sector"],
             "subSector": template["subSector"],

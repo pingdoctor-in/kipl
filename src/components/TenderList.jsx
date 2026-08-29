@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   CheckCircle2, AlertTriangle, Users, ExternalLink, Calendar, 
-  Building2, Zap, ArrowUpRight, ShieldCheck, MapPin, Sparkles
+  Building2, Zap, ArrowUpRight, ShieldCheck, MapPin, Sparkles, Globe
 } from 'lucide-react';
 
 export default function TenderList({ tenders, onSelectTender }) {
@@ -59,7 +59,7 @@ export default function TenderList({ tenders, onSelectTender }) {
               <th className="py-3 px-4">Tender Value</th>
               <th className="py-3 px-4">Deadline</th>
               <th className="py-3 px-4 text-center">Eligibility Fit</th>
-              <th className="py-3 px-4 text-right">Action</th>
+              <th className="py-3 px-4 text-right">Portal Link & Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/80">
@@ -86,6 +86,11 @@ export default function TenderList({ tenders, onSelectTender }) {
                       <div>
                         <div className="flex items-center space-x-2">
                           <span className="font-mono text-[10px] text-slate-400">{tender.id}</span>
+                          {tender.nitNumber && (
+                            <span className="font-mono text-[9px] text-cyan-400/80 bg-cyan-500/10 px-1.5 py-0.2 rounded border border-cyan-500/20">
+                              {tender.nitNumber}
+                            </span>
+                          )}
                           {tender.status === 'Priority' && (
                             <span className="bg-rose-500/10 text-rose-400 text-[10px] px-1.5 py-0.2 rounded font-bold border border-rose-500/20">
                               Priority
@@ -157,18 +162,30 @@ export default function TenderList({ tenders, onSelectTender }) {
                     </div>
                   </td>
 
-                  {/* Action Button */}
+                  {/* Portal Link & Action Buttons */}
                   <td className="py-3.5 px-4 text-right">
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectTender(tender);
-                      }}
-                      className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 font-medium transition-all text-xs"
-                    >
-                      <span>Review PQ</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="flex items-center justify-end space-x-2" onClick={(e) => e.stopPropagation()}>
+                      {tender.portalUrl && (
+                        <a
+                          href={tender.portalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Open official government portal"
+                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 border border-slate-700 transition-colors inline-flex items-center gap-1 text-[11px] font-medium"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                          <span className="hidden xl:inline">Portal</span>
+                        </a>
+                      )}
+
+                      <button 
+                        onClick={() => onSelectTender(tender)}
+                        className="inline-flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 font-medium transition-all text-xs"
+                      >
+                        <span>Review PQ</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </td>
 
                 </tr>
